@@ -1,0 +1,20 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<h1>HERE</h1>
+<div style="text-align:center">
+    <h2>{{ title }}</h2>
+    <h2>{{ todayDate | date:'yyyy-MM-dd--HH:mm:ss' }}</h2>
+  <table border="1" *ngIf='employees && employees.length' align="center">
+    <thead>
+      <td><b>ID</b></td>
+      <td><b>Name</b></td>
+      <td><b>Birthday</b></td>
+      <td><b>Location</b></td>
+    </thead>
+    <tr *ngFor='let employee of employees'>
+        <td>{{employee.empId}}</td>
+        <td>{{employee.name}}</td>
+        <td>{{employee.birthday | date:'dd/MM/yyyy'}}</td>
+        <td>{{employee.location | uppercase}}</td>
+    </tr>
+  </table>
+</div>

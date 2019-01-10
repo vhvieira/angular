@@ -1,0 +1,31 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+    <h2>{{ title }}</h2>
+    <h2>{{ todayDate | date:'yyyy-MM-dd--HH:mm:ss' }}</h2>
+  <table border="1">
+    <tr>
+      <!--
+        <mat-form-field class="full-width">
+            <input matInput type="email" placeholder="Email" formControlName="email" required>
+            <mat-error *ngFor="let validation of account_validation_messages.email">
+              <mat-error class="error-message" *ngIf="accountDetailsForm.get('email').hasError(validation.type) && (accountDetailsForm.get('email').dirty || accountDetailsForm.get('email').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </mat-form-field>
+      -->
+          <mat-card>
+              <mat-form-field>
+                <input matInput [(ngModel)]="answer" placeholder="Who has the best dev tutorials?">
+              </mat-form-field>
+
+              <br>
+
+              <button mat-raised-button (click)="showAnswer()">Answer me</button>
+              <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+          </mat-card>
+
+          <mat-card *ngIf="answerDisplay">
+                <h1>{{ answerDisplay }}, you're damn right.</h1>
+          </mat-card>
+    </tr>
+  </table>
+</div>
