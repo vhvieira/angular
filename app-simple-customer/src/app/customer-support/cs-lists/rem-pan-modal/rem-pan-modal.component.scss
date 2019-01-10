@@ -1,0 +1,45 @@
+.rem-pan-title {
+  font-family: MarkOffc-l;
+  font-weight: bold;
+  color: black;
+}
+
+.rem-pan-value {
+  font-family: MarkOffc-l;
+  color: gray;
+  line-height: 200%;
+}
+
+.modal-buttons > button {
+  margin-bottom: 0px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  &[for=timepicker] {
+    visibility: hidden;
+  }
+}
+
+.datepicker {
+  padding-left: 0;
+}
+
+.date-time-picker {
+  display: flex;
+  align-items: center;
+}
+
+.modal-header {
+  border: none;
+}
+
+.modal-body {
+  padding-left: 15px;
+  padding-top: 10px;
+}
+
+h4 {
+  line-height: 140%;
+}

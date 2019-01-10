@@ -1,0 +1,168 @@
+{
+  "OK": "Aceptar",
+  "HOME": "Casa {{value}}",
+  "HELLO": "Hello",
+  "REFRESH": "Actualizar",
+  "NO_FILTER": "- sin filtro -",
+  "EQUALS": "equals",
+  "GREATER_THAN": "greater than",
+  "LESS_THAN": "less than",
+  "BEFORE": "before",
+  "AFTER": "after",
+  "ON": "on",
+  "BETWEEN": "between",
+  "CONTAINS": "contains",
+  "CANCEL": "Cancelar",
+  "CONFIRMATION_DIALOG": {
+    "HEADER": "Confirmación Diálogo",
+    "OK": "Aceptar",
+    "CANCEL": "Cancelar"
+  },
+  "PLEASE_WAIT": "Sírvase esperar",
+  "MOMENT": {
+    "DISPLAY_FORMATS": {
+      "DATE_ONLY": "DD MMM YYYY",
+      "DATE_AND_TIME": "DD MMM YYYY, HH:mm:ss",
+      "DATE_AND_TIME_AND_TZ": "DD MMM YYYY, HH:mm:ssZZ"
+    }
+  },
+  "NOTIFICATIONS": {
+    "TITLE": {
+      "INFO": "Información",
+      "SUCCESS": "Éxito",
+      "WARNING": "Advertencia",
+      "ERROR": "Error"
+    }
+  },
+  "ACTION": {
+    "SUCCESS": "Éxito",
+    "ERROR": "Error",
+    "DOWNLOAD": {
+      "WAIT": "Downloading file...",
+      "SUCCESS": "Download finished.",
+      "ERROR": "Download error."
+    }
+  },
+  "CUSTOMER_SUPPORT": {
+    "WAIT": {
+      "DATA": "Loading data",
+      "SEARCH_TRANSACTIONS": "Searching for transactions",
+      "PAN_INFO": "Requesting PAN information",
+      "SAVING": "Saving Changes",
+      "LISTHISTORY": "Loading list history",
+      "LOAD_UDTS": "Loading lists",
+      "SEARCH_UDT": "Checking for PAN in list",
+      "ADD_PAN_TO_UDT": "Adding PAN to list",
+      "REMOVE_PAN_FROM_UDT": "Removing PAN from list",
+      "ADD_AUDIT_RECORD": "Adding audit record"
+    },
+    "LABELS": {
+      "LANGUAGE": "Idioma",
+      "USERPREF": "Preferencias del usuario",
+      "ORGAPREF": "Preferencias de la Organización",
+      "HELPCENTER": "Centro de Ayuda",
+      "SAVE": "Guardar",
+      "CANCEL": "Cancelar",
+      "CASESUPPRESSION": "Supresión caso",
+      "CASEAGINGDAYS": "El envejecimiento de casos Días",
+      "CASESUPPRESSIONDAYS": "Días de supresión caso",
+      "CLOSE": "Cerrar",
+      "ON": "Encendido",
+      "OFF": "Apagado"
+    },
+    "MESSAGES": {
+      "UPDATE_SUCCESSFUL" : "Actualización exitosa",
+      "CREATE_USER_SESSION" : "Creación de sesión de usuario",
+      "DELETE_USER_SESSION" : "Finalización de la sesión de usuario",
+      "RETRIEVING_USER_PROFILE" : "Recuperando el perfil de usuario",
+      "RETRIEVING_USER_PREFERENCES" : "Recuperando las preferencias del usuario",
+      "UPDATING_USER_PREFERENCES" : "Guardar preferencias de los usuarios",
+      "RETRIEVING_ORG_PREFERENCES" : "Recuperando las preferencias de la organización",
+      "UPDATING_ORG_PREFERENCES" : "Guardar preferencias organización",
+      "RETRIEVING_PERMISSIONS": "Recuperando los permisos de usuario",
+      "RETRIEVING_ACCOUNT_RANGES": "Recuperando rangos de cuentas",
+      "RETRIEVING_HELP_MEDIA" : "Recuperando la información de ayuda",
+      "RETRIEVING_PRODUCTS" : "Recuperando productos",
+      "INITIALIZING_APP" : "La inicialización",
+      "DEFAULT_RETRIEVE_MESSAGE" : "Recuperando datos",
+      "DEFAULT_UPDATE_MESSAGE" : "Guardar datos",
+      "SERVER_RESPONSE_STATUS_0": "Servicios no disponibles actualmente",
+      "SERVER_RESPONSE_STATUS_401": "Se realizó una solicitud no autorizada",
+      "SERVER_RESPONSE_STATUS_403": "Solicitud prohibida",
+      "SERVER_RESPONSE_STATUS_404": "No se encontró el recurso",
+      "SERVER_RESPONSE_STATUS_500": "Ocurrió un error del servidor interno",
+      "SERVER_RESPONSE_STATUS_503": "Servicio temporalmente no disponible",
+      "SERVER_RESPONSE_STATUS_504": "Ha ocurrido una interrupción",
+      "SESSION_ENDED" : "Sesión finalizada",
+      "SESSION_TIMEOUT_OCCURED" : "Ocurrió tiempo límite de la sessión",
+      "UNKNOWN_ERROR_OCCURRED": "Un error desconocido ocurrió"
+    },
+    "PLACEHOLDERS": {
+      "SELECT_CUSTOMER": "Seleccionar cliente"
+    },
+    "SHARED": {
+      "BANNER": "The Fraud Center",
+      "MANAGE_PRODUCTS": "Mis Productos",
+      "DASHBOARDS_AND_REPORTS": "Mis Cuadros de Mando",
+      "LEARN_MORE": "Aprende más",
+      "GREETING": "Hola {{name}}!",
+      "SIGNOUT": "Desconectar"
+    },
+    "ERROR": {
+      "REQUIRED_VALIDATION": "Se requiere valor",
+      "GREATER40_VALIDATION": "El valor máximo para casos de envejecimiento es de 40 Días",
+      "LESSTHAN0_VALIDATION": "El valor mínimo para el caso del envejecimiento es 1 Días",
+      "CASESUPPRESSION_VALIDATION":"Días de supresión caso debe ser mayor que 0 y menor o igual a la caja días de envejecimiento"
+    },
+    "LANG": {
+      "ENGLISH": "Inglés",
+      "SPANISH": "Español",
+      "PORTUGUESE": "Portugués"
+    },
+    "TABAPP": {
+      "LABELS": {
+        "AUTHIQ.APPNAVIGATE": "Tablero",
+        "CASE.APPNAVIGATE": "Casos",
+        "QUERY.APPNAVIGATE": "Consulta",
+        "REPORT.APPNAVIGATE": "Reportes",
+        "RULE.APPNAVIGATE": "Reglas",
+        "SAFEB.APPNAVIGATE": "Buscar Transacciones",
+        "TRAN.APPNAVIGATE": "Transacciones",
+        "UDT.APPNAVIGATE": "Listas"
+      },
+      "TOOLTIPS": {
+        "AUTHIQ.APPNAVIGATE": "Tablero",
+        "CASE.APPNAVIGATE": "Revisar Casos",
+        "QUERY.APPNAVIGATE": "Administrar Consultas",
+        "REPORT.APPNAVIGATE": "Administrar Reportes",
+        "RULE.APPNAVIGATE": "Administrar Reglas",
+        "SAFEB.APPNAVIGATE": "Buscar transacciones para reportar como fraude",
+        "TRAN.APPNAVIGATE": "Revisar Transacciones",
+        "UDT.APPNAVIGATE": "Administar Listas"
+      }
+    },
+    "TIMEOUT_DIALOG":{
+      "TIMEOUT_WARNING":"Advertencia de Interrupción",
+      "IDLE_WARNING_MSG":"Su sesión caducará en",
+      "SECONDS":"segundos",
+      "BUTTON":{
+        "KEEP_ACTIVE":"Mantener Activa"
+      },
+      "TOOL_TIP":{
+        "CANCEL_TIMEOUT":"Cancelar interrupción"
+      }
+    },
+    "USERS": "XISSR01,XISSR02,XPROC01,XPROC02,XSAFE01,EBROS01,XSPRT01"
+  },
+  "DATE": {
+      "LOCALE": {
+        "format": "dd-mm-yy",
+        "firstDayOfWeek": 0,
+        "dayNames": ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"],
+        "dayNamesShort": ["dom", "lun", "mar", "mie", "jue", "vie", "sab"],
+        "dayNamesMin": ["do", "lu", "ma", "mi", "ju", "vi", "sa"],
+        "monthNames": [ "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septimbre", "octubro", "noviembre", "dicembre" ],
+        "monthNamesShort": [ "ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic" ]
+      }
+    }
+}

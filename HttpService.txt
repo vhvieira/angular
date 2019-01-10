@@ -1,0 +1,10 @@
+@Injectale
+
+Observable rxjs -> Reactive, multiple returns and can be cancelled
+Promisse -> Just on return, can not be cancelled
+
+Observable acceptes map, read, retry, pipe and more functions.
+
+Http and Response from @angular/http
+Inject in constructor _http.get, _http.post, _http.put and so on. Rx style.
+Can use a json file fixed and method fileVar.json();

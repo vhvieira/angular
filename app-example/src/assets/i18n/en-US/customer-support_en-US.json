@@ -1,0 +1,117 @@
+{
+  "CUSTOMER_SUPPORT": {
+    "WAIT": {
+      "BRANDPRODUCTCODES": "Loading Brand Product Codes",
+      "DATA": "Loading data",
+      "SAVING": "Saving Changes"
+    },
+    "LABELS": {
+      "FILTERS": "Filters",
+      "APPLY_FILTERS": "Apply Filters",
+      "REMOVE_ALL": "Remove All",
+      "REFRESH": "Refresh",
+      "SAVE": "Save",
+      "EDIT": "Edit",
+      "CANCEL": "Cancel",
+      "EXPORT": "Export",
+      "MIN": "Min: {{value}}"
+    },
+    "CARD_TYPE": {
+      "C": "Credit",
+      "D": "Debit",
+      "P": "Prepaid",
+      "O": "Other"
+    },
+    "COLUMNS": {
+      "MEMBERID": "ICA",
+      "STARTINGACCNTRANGE": "Account Range From",
+      "ENDINGACCNTRANGE": "Account Range To",
+      "BRANDPRODUCTCODE": "Brand Product",
+      "CARDTYPE": "Card Type",
+      "VIPINDICATOR": "VIP",
+      "CRTEDTTM": "Created Date",
+      "CRTEUSR": "Created By",
+      "LASTUPDATEDTTM": "Last Updated",
+      "A": "A",
+      "C": "C",
+      "F": "F",
+      "H": "H",
+      "O": "O",
+      "P": "P",
+      "R": "R",
+      "T": "T",
+      "U": "U",
+      "X": "X",
+      "Z": "Z"
+    },
+    "MESSAGES": {
+      "SERVER_RESPONSE_SUCCESS": "Operation was successfull",
+      "SERVER_RESPONSE_STATUS_0": "Services currently unavailable",
+      "SERVER_RESPONSE_STATUS_401": "An unauthorized request was made",
+      "SERVER_RESPONSE_STATUS_403": "Request forbidden",
+      "SERVER_RESPONSE_STATUS_404": "Resource not found",
+      "SERVER_RESPONSE_STATUS_500": "An internal server error occurred",
+      "SERVER_RESPONSE_STATUS_503": "Service temporarily unavailable",
+      "SERVER_RESPONSE_STATUS_504": "A timeout occurred",
+      "UPDATE": {
+        "SUCCESS": "Updated successfully. They may take up to an hour to affect transaction processing."
+      }
+    },
+    "PLACEHOLDERS": {
+    },
+    "SHARED": {
+    },
+    "ERROR": {
+      "ERROR": "Error",
+      "UNEXPECTED": "Unexpected",
+      "TRY_AGAIN": "Go back and try again",
+      "UNKNOWN": "Unknown Error.",
+      "LOAD_DICTIONARY": "Error Loading dictionary.",
+      "LOAD_DATA": "Error Loading data.",
+      "TRY_LATER": "Please, try again later.",
+      "SYSTEM": "Unable to update limits, please try again later.",
+      "INVALID.DATE.VALUE.FUTURE": "Invalid date: Expected a future date.",
+      "INVALID.DATE.VALUE.PAST": "Invalid date: Expected a past date.",
+      "INVALID.DECIMAL.VALUE.MAX": "Number is larger than expected",
+      "INVALID.DECIMAL.VALUE.MIN": "Number is smaller than expected",
+      "INVALID.NOT.NULL.VALUE": "Invalid null value.",
+      "INVALID.NUMERIC.VALUE.CURRENCY": "Invalid currency code or format.",
+      "INVALID.NUMERIC.VALUE.DIGITS": "Some numeric digits provided are not accepted. Use 0-9 numbers only.",
+      "INVALID.NUMERIC.VALUE.MAX": "Number is larger than expected.",
+      "INVALID.NUMERIC.VALUE.MIN": "Number is smaller than expected.",
+      "INVALID.NUMERIC.VALUE.RANGE": "Number is out of expected range.",
+      "INVALID.TEXT.VALUE.BLANK": "The text field cannot be blank.",
+      "INVALID.TEXT.VALUE.EMPTY": "The text field cannot be empty.",
+      "INVALID.TEXT.VALUE.LENGTH": "The text is too long.",
+      "INVALID.TEXT.VALUE.PATTERN": "The provided text field was not in the correct pattern."
+    },
+    "LANG": {
+    },
+    "TABAPP": {
+      "LABELS": {
+        "RANGEBLOCK.APPNAVIGATE": "Selective Rangeblock"
+      },
+      "TOOLTIPS": {
+        "RANGEBLOCK.APPNAVIGATE": "Manage Rangeblocks"
+      }
+    },
+    "TIMEOUT_DIALOG": {
+      "BUTTON": {
+      },
+      "TOOL_TIP": {
+      }
+    },
+    "USERS": "XISSR01,XISSR02,XPROC01,XPROC02,XSAFE01,EBROS01,XSPRT01",
+    "DATE": {
+      "LOCALE": {
+        "format": "dd-mm-yy",
+        "firstDayOfWeek": 0,
+        "dayNames": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        "dayNamesMin": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+        "monthNames": [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
+        "monthNamesShort": [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
+      }
+    }
+  }
+}

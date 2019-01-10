@@ -1,0 +1,17 @@
+/* This file is for setting global styles  */
+@import 'variables';
+
+body {
+  max-width: 100%;
+}
+
+html {
+  overflow: auto;
+}
+
+tv-viewer tv-filter .dropdown .ui-select-match>.btn>.ui-select-match-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: inherit;
+}

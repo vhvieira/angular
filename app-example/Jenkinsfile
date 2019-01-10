@@ -1,0 +1,31 @@
+// Load the pipeline
+def mavenIntegrationPipeline = fileLoader.fromGit('maven-integration-pipeline','http://globalrepository.mclocal.int/stash/scm/riskia/maven-integration-pipeline.git','master',null,'GIT')
+
+def recipients = 'brian.thompson@mastercard.com,jeremy.mccoy@mastercard.com,rahul.desai@mastercard.com,andre.silva@mastercard.com,romulo.zoch@mastercard.com,ashish.mahajan@mastercard.com,andre.requejo@mastercard.com,rafael.leal@mastercard.com,rafael.ide@mastercard.com,jagdeep.parmar@mastercard.com,bala.dharmaraj@mastercard.com,victor.vieira@mastercard.com'
+
+// Run the pipeline, passing your own chosen email address for build failure notifications
+def results = mavenIntegrationPipeline.runPipeline([
+  notificationEmail: recipients,
+  javaTool: 'JDK8',
+  enforceVersionCheck: false,
+  buildClosure: {
+    env.NODEJS_HOME = "${tool 'NodeJS-8.1.4'}"
+    env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
+    sh "node -v"
+    sh "npm -v"
+    sh "npm install"
+    sh "npm run ci"
+  }
+])
+
+if (env.BRANCH_NAME == 'master') {
+  def envPromotePipe = fileLoader.fromGit('environment-promotion-pipeline', 'http://globalrepository.mclocal.int/stash/scm/riskia/environment-promotion-pipeline.git', 'master', null, 'GIT')
+  envPromotePipe.applyEnvironment([
+    name: 'security-solutions-web-dev',
+    environmentName: 'dev',
+    artifactName: 'customer-support-webapp',
+    version: results['version'],
+    repository: results['repo']
+  ])
+}
+

@@ -1,0 +1,54 @@
+.add-pan-value {
+  font-family: MarkOffc-l;
+  font-style: italic;
+  color: grey;
+}
+
+.modal-buttons > button {
+  margin-bottom: 0px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  &[for=timepicker] {
+    visibility: hidden;
+  }
+}
+
+.datepicker {
+  padding-left: 0;
+}
+
+.date-time-picker {
+  display: flex;
+  align-items: center;
+}
+
+.modal-header {
+  border: none;
+}
+
+.modal-body {
+  padding-left: 15px;
+  padding-top: 10px;
+}
+
+.datepicker table tr td.today {
+  border: none;
+  background-color: #f0ede9;
+}
+
+/deep/ #add-pan-modal .fc-dialog .datepicker table tr td.new {
+  border: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+span.input-text-error {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+}

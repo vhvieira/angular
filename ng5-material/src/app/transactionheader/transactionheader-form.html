@@ -1,0 +1,63 @@
+<div style="text-align:center">
+<!-- Simple form -->
+<form [formGroup]="transactionHeaderForm" (ngSubmit)="onSubmitForm(transactionHeaderForm.value)">
+  <table>
+      <div class="row">
+          <div class="col-sm-4">
+            <fieldset>
+              <label for="callerUserId">Caller User ID</label>
+              <input type="text" class="form-control input-standard" placeholder="" formControlName="callerUserId" required>
+              <mat-error *ngFor="let validation of validation_messages.callerUserId">
+                <mat-error class="error-message" *ngIf="transactionHeaderForm.get('callerUserId').hasError(validation.type) && (transactionHeaderForm.get('callerUserId').dirty || transactionHeaderForm.get('callerUserId').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </fieldset>
+          </div>
+          <div class="col-sm-4">
+            <fieldset>
+              <label for="ticketNumber">Caller First Name</label>
+              <input type="text" class="form-control input-standard" placeholder="" formControlName="ticketNumber" required>
+              <mat-error *ngFor="let validation of validation_messages.ticketNumber">
+                <mat-error class="error-message" *ngIf="transactionHeaderForm.get('ticketNumber').hasError(validation.type) && (transactionHeaderForm.get('ticketNumber').dirty || transactionHeaderForm.get('ticketNumber').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </fieldset>
+          </div>
+          <div class="col-sm-4">
+              <fieldset>
+                <label for="callerLastName">Caller Last Name</label>
+                <input type="text" class="form-control input-standard" placeholder="" formControlName="callerLastName" required>
+                <mat-error *ngFor="let validation of validation_messages.callerLastName">
+                  <mat-error class="error-message" *ngIf="transactionHeaderForm.get('callerLastName').hasError(validation.type) && (transactionHeaderForm.get('callerLastName').dirty || transactionHeaderForm.get('callerLastName').touched)">{{validation.message}}</mat-error>
+                </mat-error>
+              </fieldset>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <fieldset>
+            <label for="comments">Comments</label>
+            <textarea class="form-control input-standard" placeholder="" formControlName="comments" required></textarea>
+            <mat-error *ngFor="let validation of validation_messages.comments">
+              <mat-error class="error-message" *ngIf="transactionHeaderForm.get('comments').hasError(validation.type) && (transactionHeaderForm.get('comments').dirty || transactionHeaderForm.get('comments').touched)">{{validation.message}}</mat-error>
+            </mat-error>
+          </fieldset>
+      </div>
+      <div class="col-sm-4">
+            <fieldset>
+              <label for="search">Search</label>
+              <input type="text" class="form-control input-standard" placeholder="" formControlName="search" required>
+              <mat-error *ngFor="let validation of validation_messages.search">
+                <mat-error class="error-message" *ngIf="transactionHeaderForm.get('search').hasError(validation.type) && (transactionHeaderForm.get('search').dirty || transactionHeaderForm.get('search').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+           </fieldset>
+      </div>
+    </div>
+      <div class="placeholder"></div>
+      <div class="row">
+        <div class="col-md-9 text-right" >
+          <button id="resetButton" class="btn secondary" type="button" (click)="onResetButton()">New Inquire</button>
+          <button id="saveButton" type="submit" class="btn primary" [disabled]="!transactionHeaderForm.valid" >Search</button>
+        </div>
+      </div>
+  </table>
+</form>
+</div>

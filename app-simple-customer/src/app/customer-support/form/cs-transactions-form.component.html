@@ -1,0 +1,135 @@
+<form [formGroup]="transactionForm" (ngSubmit)="onSubmitForm()">
+  <div class="container-fluid white">
+    <div class="row">
+
+      <div class="col-xs-3">
+          <label for="userId">{{'CUSTOMER_SUPPORT.LABELS.CALLER_USER_ID' | translate}}</label>
+          <input class="form-control input-standard" [readOnly]="isPopulated('userId')" [ngClass]="{ 'input-error-icon': hasError('userId') }" type="text"
+            id="userId" formControlName="userId" (keyup)="trim('userId')" autofocus="true" tabindex="0">
+          <div id="userIdErrors" *ngFor="let validation of validationMessages.userId; trackBy: trackByFn">
+              <span class="input-text-error" *ngIf="showError('userId', validation)">{{validation.message}}</span>
+          </div>
+      </div>
+
+      <div class="col-xs-3">
+          <label for="firstName">{{'CUSTOMER_SUPPORT.LABELS.FIRST_NAME' | translate}}</label>
+          <input class="form-control input-standard" [readOnly]="isPopulated('firstName')" [ngClass]="{ 'input-error-icon': hasError('firstName') }" type="text"
+           id="firstName" formControlName="firstName" (blur)="trim('firstName')">
+          <div id="firstNameErrors" *ngFor="let validation of validationMessages.firstName; trackBy: trackByFn">
+              <span class="input-text-error" *ngIf="showError('firstName', validation)">{{validation.message}}</span>
+          </div>
+      </div>
+
+      <div class="col-xs-3">
+          <label for="lastName">{{'CUSTOMER_SUPPORT.LABELS.LAST_NAME' | translate}}</label>
+          <input class="form-control input-standard" [readOnly]="isPopulated('lastName')" [ngClass]="{ 'input-error-icon': hasError('lastName') }" type="text"
+           id="lastName" formControlName="lastName" (blur)="trim('lastName')">
+          <div id="lastNameErrors" *ngFor="let validation of validationMessages.lastName; trackBy: trackByFn">
+              <span class="input-text-error" *ngIf="showError('lastName', validation)">{{validation.message}}</span>
+          </div>
+      </div>
+
+      <div class="col-xs-3">
+          <label for="ticketNumber">{{'CUSTOMER_SUPPORT.LABELS.TICKET_NUMBER' | translate}}</label>
+          <input class="form-control input-standard" [ngClass]="{ 'input-error-icon': hasError('ticketNumber') }" type="text"
+           id="ticketNumber" (keyup)="trim('ticketNumber')" formControlName="ticketNumber">
+          <div id="ticketNumberErrors" *ngFor="let validation of validationMessages.ticketNumber; trackBy: trackByFn">
+              <span class="input-text-error" *ngIf="showError('ticketNumber', validation)">{{validation.message}}</span>
+          </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-xs-8">
+        <div class="placeholder"></div>
+        <label for="comments">{{'CUSTOMER_SUPPORT.LABELS.COMMENTS' | translate}}</label>
+        <textarea class="form-control comments" [ngClass]="{ 'input-error-icon': hasError('comments') }" id="comments"
+          formControlName="comments" rows="4"></textarea>
+        <div id="commentsErrors" *ngFor="let validation of validationMessages.comments; trackBy: trackByFn">
+            <span class="input-text-error" *ngIf="showError('comments', validation)">{{validation.message}}</span>
+        </div>
+      </div>
+
+      <div class="col-xs-3">
+          <div class="placeholder"></div>
+          <div class="placeholder"></div>
+          <ul id="inquiryResults">
+            <li>
+              <label class="bold group-label">{{'CUSTOMER_SUPPORT.LABELS.ICA' | translate}}:</label>
+              {{ica}}
+            </li>
+            <li>
+              <label class="bold group-label">{{'CUSTOMER_SUPPORT.LABELS.INSTITUTION_NAME' | translate}}:</label>
+              {{institutionName}}
+            </li>
+          </ul>
+          <button id="resetButton"
+            class="btn secondary"
+            [ngClass]="{
+              'disabled' : canReset() === 'disabled'
+              && !isUrl('lists')
+              && !isPopulated('form') }"
+            type="button"
+            [disabled]="canReset() && !isUrl('lists') && !isPopulated('form')"
+            (click)="onNewInquiry()">{{'CUSTOMER_SUPPORT.LABELS.NEW_INQUIRY' | translate}}</button>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-5">
+            <div *ngIf="isUrl('lists')">
+              <div class="placeholder"></div>
+              <button
+                type="button"
+                [disabled]="disableAddPanButton"
+                class="btn secondary"
+                id="addPanButton"
+                (click)="openAddModal()" >
+                  {{'CUSTOMER_SUPPORT.LABELS.ADD_PAN' | translate }}
+              </button>
+              <button
+                type="button"
+                [disabled]="disableRemovePanButton"
+                class="btn secondary"
+                id="removePanButton"
+                (click)="openRemModal()" >
+                {{'CUSTOMER_SUPPORT.LABELS.REMOVE_PAN'  | translate}}
+              </button>
+            </div>
+         </div>
+      <div class="col-xs-3">
+        <div class="placeholder"></div>
+        <div class="radio-container">
+            <ul>
+              <li [ngClass]="{'disabled-radio': isUrl('lists')}">
+                <input type="radio" class="radio" id="searchTypePan" formControlName="searchType" [readOnly]="isUrl('lists')" [value]="this.searchTypeValues[0]" checked="true">
+                <label for="searchTypePan" class="radio-label">{{'CUSTOMER_SUPPORT.LABELS.PAN' | translate}}</label>
+              </li>
+              <li  [ngClass]="{'disabled-radio': isUrl('lists')}">
+                <input type="radio" class="radio"  id="searchTypeTransactionId" formControlName="searchType" [readOnly]="isUrl('lists')" [value]="this.searchTypeValues[1]">
+                <label for="searchTypeTransactionId" class="radio-label">{{'CUSTOMER_SUPPORT.LABELS.TRANSACTION_ID' | translate}}</label>
+              </li>
+            </ul>
+        </div>
+      </div>
+      <div class="col-xs-3">
+      <div class="placeholder"></div>
+      <div class="form-group">
+          <div class="input-group">
+            <span class="sprite search_icon"></span>
+            <input placeholder="{{'CUSTOMER_SUPPORT.FORM.SEARCH' | translate}}" formControlName="searchField" type="search" [readOnly]="isPopulated('searchField')"
+              class="input-standard search form-control" id="searchField" (keyup)="trim('searchField')" [ngClass]="{ 'input-error-icon': hasError('searchField') }" />
+            <span class="input-group-btn">
+                <button class="btn primary" type="button" [disabled]="canPerformSearch() || isPopulated('searchField')" (click)="onSubmitForm()">Search</button>
+            </span>
+          </div>
+          <div id="searchFieldErrors" *ngFor="let validation of validationMessages.searchField; trackBy: trackByFn">
+            <span class="input-text-error" *ngIf="showError('searchField', validation)">{{validation.message}}</span>
+        </div>
+      </div>
+     </div>
+    </div>
+  </div>
+</form>

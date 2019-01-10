@@ -1,0 +1,29 @@
+<div style="text-align:center">
+<!-- Simple form -->
+<form [formGroup]="userDetailsForm" (ngSubmit)="onSubmitForm(userDetailsForm.value)">
+  <table border="1">
+    <tr>
+        <td colspan="2"><h3>{{ title }}</h3></td>
+    </tr>
+    <tr>
+        <td colspan="2"><h3>{{ todayDate | date:'yyyy-MM-dd--HH:mm:ss' }}</h3></td>
+    </tr>
+    <tr>
+      <td>Who is your love?</td>
+      <td>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="?" formControlName="email" required>
+              <mat-error *ngFor="let validation of validation_messages.email">
+                <mat-error class="error-message" *ngIf="userDetailsForm.get('email').hasError(validation.type) && (userDetailsForm.get('email').dirty || userDetailsForm.get('email').touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center">
+          <button class="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!userDetailsForm.valid">Submit</button>
+        </td>
+    </tr>
+  </table>
+</form>
+</div>

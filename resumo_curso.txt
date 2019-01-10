@@ -1,0 +1,62 @@
+First:
+[X] https://angular-templates.io/tutorials/about/angular-forms-and-validations
+Angular Reactive Forms - Synchronous, form is handled by the @component (tscript), no ngModel.
+Angular Template driven forms: Html form controls and uses directives ar ngModel.
+
+[X] Ler:
+https://coursetro.com/posts/code/113/How-to-Build-an-Angular-5-Material-App
+https://www.sitepoint.com/angular-material-design-components/
+https://codeburst.io/how-node-js-single-thread-mechanism-work-understanding-event-loop-in-nodejs-230f7440b0ea
+https://medium.com/@ismapro/first-steps-with-angular-cli-and-angular-material-5a90406e9a4
+https://angular-templates.io/tutorials/about/angular-forms-and-validations
+
+[X] CONTINUAR (erro) --> Fazer um reactive component form dinamico com validação usando abaixo:
+(Fonte: https://angular-templates.io/tutorials/about/angular-forms-and-validations)
+Fazer o form como está na página na sessão "Designing our form and validation requirements"
+
+Builtin Angular Validators:
+https://angular.io/api/forms/Validators
+https://github.com/angular/material2
+https://coursetro.com/posts/code/113/How-to-Build-an-Angular-5-Material-App
+
+
+
+
+Reactive Forms:
+-------------------
+FormControl : this.username = new FormControl('agustin', Validators.required);
+<ion-input type="text" formControlName="username"></ion-input>
+-> Contém um elemento de formulário em si! Ex: Input, Select
+
+FormGroup : Contém um grupo de form control (parte do mesmo formulário). Ex: Form
+FormArray: Igual item acima, porém dinamico;
+
+FormBuilder: Helper class to create instances of FormArray, FormGroup and FormControl.
+
+On blur validation: Angular 5 has a new option for your ngModel 
+this.email = new FormControl(null, {
+	validators: Validators.required,
+	updateOn: 'blur'
+});
+
+
+
+
+import { FormBuilder, Validators } from '@angular/forms';
+
+constructor(private fb: FormBuilder, private auth: AuthService) {
+    this.form = fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, isEmailValid('email')]],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
+    });
+  }
+
+function isEmailValid(control) {
+  return control => {
+    var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return regex.test(control.value) ? null : { invalidEmail: true };
+  }
+}

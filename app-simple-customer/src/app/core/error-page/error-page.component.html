@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="errorPage">
+            <h1>{{error && error!.code ? error!.code : 'CUSTOMER_SUPPORT.ERROR.UNKNOWN' | translate}} {{'CUSTOMER_SUPPORT.ERROR.ERROR' | translate}}</h1>
+            <div class="border-placeholder"></div>
+            <p>{{error && error!.text ? error!.text : 'CUSTOMER_SUPPORT.ERROR.UNKNOWN' | translate}}</p>
+            <p class="text-center" style="cursor: pointer" (click)="goBack()">
+                <i class="fa fa-refresh"></i> {{'CUSTOMER_SUPPORT.ERROR.TRY_AGAIN' | translate}}
+            </p>
+        </div>
+    </div>
+</div>

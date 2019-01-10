@@ -1,0 +1,10 @@
+{
+  "extends": "./node_modules/@mastercard/ng-commons/config/tsconfig.base",
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  }
+}

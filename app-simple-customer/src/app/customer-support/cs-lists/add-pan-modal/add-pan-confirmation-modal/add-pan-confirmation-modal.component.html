@@ -1,0 +1,44 @@
+<div bsModal [config]="config"  id="add-pan-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog fc-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="confirmation-dialog-title"><h4>{{
+            'MODAL.ADD.CONFIRMATION.TITLE' | translate
+          }}</h4></div>
+        </div>
+        <div class="modal-body">
+          <p class="modal-body-text" id="confirmation-body-head">
+            {{ 'MODAL.ADD.CONFIRMATION.BODY.HEAD' | translate }}
+          </p>
+          <p class="modal-body-text" id="confirmation-body-tail">
+            PAN: {{ pan }}
+            <span>
+              {{
+                'MODAL.ADD.CONFIRMATION.BODY.TAIL'
+                | translate: {value: listNames}
+              }}
+            </span>
+          </p>
+          <hr>
+          <div class="modal-add-pan-dates">
+            <div class="col-sm-6 start-date">
+              <label class="date-label" id="start-date-label">{{ 'MODAL.ADD.DATEPICKER.START_DATE' | translate }}</label>
+              <label cid="start-date-value">{{ startDate | dateFormat: 'DD-MMM-YYYY'}}</label>
+            </div>
+            <div class="col-sm-6 end-date">
+              <label class="date-label" id="end-date-label">{{ 'MODAL.ADD.DATEPICKER.END_DATE' | translate }}</label>
+              <label id="end-date-value">{{ endDate | dateFormat: 'DD-MMM-YYYY'}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-xs-12 modal-buttons">
+              <button id="modalSecondaryButton" type="button" class="btn btn-sm secondary" data-dismiss="modal" (click)="onSecondaryButton()">{{ 'CUSTOMER_SUPPORT.LABELS.CANCEL' | translate}}</button>
+              <button id="modalPrimaryButton" type="button" class="btn btn-sm primary" (click)="onPrimaryButton()">{{ 'CUSTOMER_SUPPORT.LABELS.CONFIRM' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,58 @@
+{
+  "OK": "OK",
+  "HOME": "Home {{value}}",
+  "HELLO": "Hello",
+  "REFRESH" : "Refresh",
+  "NO_FILTER" : "-- no filter --",
+  "EQUALS" : "equals",
+  "GREATER_THAN" : "greater than",
+  "LESS_THAN": "less than",
+  "BEFORE": "before",
+  "AFTER" : "after",
+  "ON" : "on",
+  "BETWEEN" : "between",
+  "CONTAINS" : "contains",
+  "CANCEL" : "Cancel",
+  "YES": "Yes",
+  "NO": "No",
+  "CONFIRMATION_DIALOG" : {
+    "HEADER" : "Confirmation Dialog",
+    "OK" : "Ok",
+    "CANCEL" : "Cancel"
+  },
+  "PLEASE_WAIT" : "Please wait",
+  "MOMENT": {
+    "DISPLAY_FORMATS": {
+      "DATE_ONLY": "MMM DD YYYY",
+      "DATE_AND_TIME": "MMM DD YYYY, HH:mm:ss",
+      "DATE_AND_TIME_AND_TZ": "MMM DD YYYY, HH:mm:ssZ"
+    }
+  },
+  "NOTIFICATIONS": {
+    "TITLE": {
+      "INFO": "Information",
+      "SUCCESS": "Success",
+      "WARNING": "Warning",
+      "ERROR": "Error"
+    }
+  },
+  "ACTION": {
+    "SUCCESS": "Success",
+    "ERROR": "Error",
+    "DOWNLOAD": {
+      "WAIT": "Downloading file...",
+      "SUCCESS": "Download finished.",
+      "ERROR": "Download error."
+    }
+  },
+  "HTTP": {
+    "STATUS": {
+      "401": "An unauthorized request was made",
+      "403": "Request forbidden",
+      "404": "Resource not found",
+      "500": "An internal server error occurred",
+      "503": "Service temporarily unavailable",
+      "504": "A timeout occurred"
+    }
+  }
+}

@@ -1,0 +1,93 @@
+<div style="text-align:center">
+<!-- Simple form -->
+<form [formGroup]="transactionHeaderForm" (ngSubmit)="onSubmitForm(this.transactionHeaderForm)">
+  <table>
+      <div class="row">
+          <div class="col-sm-3">
+            <fieldset>
+              <label for="callerUserId">Caller User ID</label>
+              <input type="text" class="form-control input-standard" placeholder="" formControlName="callerUserId" required>
+              <mat-error *ngFor="let validation of validation_messages.callerUserId">
+                <mat-error class="error-message" *ngIf="transactionHeaderForm.get('callerUserId')!.hasError(validation.type) && (transactionHeaderForm.get('callerUserId')!.dirty || transactionHeaderForm.get('callerUserId')!.touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </fieldset>
+          </div>
+          <div class="col-sm-3">
+              <fieldset>
+                <label for="callerFirstName">Caller First Name</label>
+                <input type="text" class="form-control input-standard" placeholder="" formControlName="callerFirstName" required>
+                <mat-error *ngFor="let validation of validation_messages.callerFirstName">
+                  <mat-error class="error-message" *ngIf="transactionHeaderForm.get('callerFirstName')!.hasError(validation.type) && (transactionHeaderForm.get('callerFirstName')!.dirty || transactionHeaderForm.get('callerFirstName')!.touched)">{{validation.message}}</mat-error>
+                </mat-error>
+              </fieldset>
+          </div>
+          <div class="col-sm-3">
+              <fieldset>
+                <label for="callerLastName">Caller Last Name</label>
+                <input type="text" class="form-control input-standard" placeholder="" formControlName="callerLastName" required>
+                <mat-error *ngFor="let validation of validation_messages.callerLastName">
+                  <mat-error class="error-message" *ngIf="transactionHeaderForm.get('callerLastName')!.hasError(validation.type) && (transactionHeaderForm.get('callerLastName')!.dirty || transactionHeaderForm.get('callerLastName')!.touched)">{{validation.message}}</mat-error>
+                </mat-error>
+              </fieldset>
+          </div>
+          <div class="col-sm-3">
+              <fieldset>
+                <label for="ticketNumber">Ticket Number</label>
+                <input type="text" class="form-control input-standard" placeholder="" formControlName="ticketNumber" required>
+                <mat-error *ngFor="let validation of validation_messages.ticketNumber">
+                  <mat-error class="error-message" *ngIf="transactionHeaderForm.get('ticketNumber')!.hasError(validation.type) && (transactionHeaderForm.get('ticketNumber')!.dirty || transactionHeaderForm.get('ticketNumber')!.touched)">{{validation.message}}</mat-error>
+                </mat-error>
+              </fieldset>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-6">
+            <fieldset>
+              <label for="comments">Comments</label>
+              <textarea class="form-control input-standard" placeholder="" formControlName="comments" required></textarea>
+              <mat-error *ngFor="let validation of validation_messages.comments">
+                <mat-error class="error-message" *ngIf="transactionHeaderForm.get('comments')!.hasError(validation.type) && (transactionHeaderForm.get('comments')!.dirty || transactionHeaderForm.get('comments')!.touched)">{{validation.message}}</mat-error>
+              </mat-error>
+            </fieldset>
+          </div>
+          <div class="col-sm-4">
+              <div>
+                  <br />
+                  <label><b>ICA:</b></label><br />
+                  <label><b>Institution Name:</b></label>
+                  <button id="resetButton" class="btn secondary" type="button" [disabled]="canReset()"
+                     (click)="onResetButton(this.transactionHeaderForm)">New Inquire</button>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+               <fieldset>
+                  <label></label>
+               </fieldset>
+            </div>
+           <div class="col-sm-4">
+             <div class="radio-container">
+                  <label></label>
+                  <fieldset>
+                        <input type="radio" class="radio" formControlName="searchType" value="1">
+                        <label for="searchType">Primary Account Number</label>
+                  </fieldset>
+                  <fieldset>
+                      <input type="radio" class="radio" formControlName="searchType" value="2">
+                      <label for="searchType">Transaction ID</label>
+                  </fieldset>
+              </div>
+            </div>
+          <div class="col-sm-2">
+              <label></label>
+              <fieldset>
+                  <button id="submitButton" class="btn secondary" type="submit"
+                  [disabled]="canPerformSearch()" (click)="onSubmitForm(this.transactionHeaderForm)">
+                    <img  src="/assets/images/small_search.png" width=20px height=20px>Search</button>
+              </fieldset>
+          </div>
+      </div>
+  </table>
+</form>
+</div>
