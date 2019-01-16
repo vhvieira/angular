@@ -19,6 +19,12 @@ export class EmployeesComponent {
       "name" : "Jeremy",
       "birthday" : "12/30/1979",
       "location" : "STL - US"
+    },
+    {
+      "empId": 2,
+      "name" : "Victor",
+      "birthday" : "08/10/1982",
+      "location" : "Curitiba - BR"
     }
   ];
 
