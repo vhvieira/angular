@@ -32,7 +32,17 @@ describe('CsTransactionsComponent', function () {
     comp = new CsTransactionsFormComponent(formBuilder, logger, renderer, transactionsFormServiceMock, routeMock);
     comp.ngOnInit();
   });
-
+  describe('Component: CsTransactionsComponent LOCAL enviroment test', () => {
+    it('should set the url  as lists ', () => {
+      const localRouteMock = {
+        url: of([])
+      } as any;
+      const localComp = new CsTransactionsFormComponent(
+        formBuilder, logger, renderer, transactionsFormServiceMock, localRouteMock
+      );
+      expect(localComp.url).toEqual('lists');
+    });
+  });
   describe('Component: CsTransactionsComponent ', () => {
     it('should be invalid when empty', () => {
       expect(comp.transactionForm.valid).toBeFalsy();
@@ -68,6 +78,90 @@ describe('CsTransactionsComponent', function () {
     it('should initialize the form to empty values', () => {
       comp.ngOnInit();
       expect(comp.transactionForm).not.toBeNull();
+    });
+    it('should call populateForm if requestorFirstName is defined', () => {
+      const expectedIca = 1234;
+      const expectedInstitutionName = 'Test';
+      transactionsFormServiceMock.auditInformation = {
+        searchType: '1',
+        ica: expectedIca,
+        custName: expectedInstitutionName,
+        requestorFirstName: 'test'
+      } as any;
+      const comp2 = new CsTransactionsFormComponent(
+        formBuilder, logger, renderer, transactionsFormServiceMock, routeMock
+      );
+      comp2.populateForm = jasmine.createSpy('populateForm');
+      comp2.disableFields = jasmine.createSpy('disableFields');
+      comp2.ngOnInit();
+      expect(comp2.populateForm).toHaveBeenCalled();
+    });
+  });
+
+  describe('method: populateForm() ', () => {
+    it('should populate the form if searchType is provided', () => {
+      transactionsFormServiceMock.auditInformation = {
+        searchType: 1,
+      } as any;
+      const comp2 = new CsTransactionsFormComponent(
+        formBuilder, logger, renderer, transactionsFormServiceMock, routeMock
+      );
+      comp2.disableFields = jasmine.createSpy('disableFields');
+      comp2.ngOnInit();
+      comp2.populateForm();
+      expect(comp2.disableFields).toHaveBeenCalled();
+    });
+
+    it('should populate the ICA and Institution name if provided', () => {
+      const expectedIca = 1234;
+      const expectedInstitutionName = 'Test';
+      transactionsFormServiceMock.auditInformation = {
+        searchType: '1',
+        ica: expectedIca,
+        custName: expectedInstitutionName
+      } as any;
+      const comp2 = new CsTransactionsFormComponent(
+        formBuilder, logger, renderer, transactionsFormServiceMock, routeMock
+      );
+      comp2.disableFields = jasmine.createSpy('disableFields');
+      comp2.ngOnInit();
+      comp2.populateForm();
+      expect(comp2.ica).toEqual(expectedIca);
+      expect(comp2.institutionName).toEqual(expectedInstitutionName);
+    });
+
+    it('should populate the searchfield with PAN if searchType is 1', () => {
+      const expectedPan = '1234';
+      transactionsFormServiceMock.auditInformation = {
+        searchType: '1',
+        ica: 1234,
+        pan: expectedPan,
+        custName: 'test'
+      } as any;
+      const comp2 = new CsTransactionsFormComponent(
+        formBuilder, logger, renderer, transactionsFormServiceMock, routeMock
+      );
+      comp2.disableFields = jasmine.createSpy('disableFields');
+      comp2.ngOnInit();
+      comp2.populateForm();
+      expect(comp2.transactionForm.controls['searchField'].value).toEqual(expectedPan);
+    });
+    it('should populate the searchfield with TRANSACTION ID if searchType is 2', () => {
+      const expectedTranId = '1234';
+      const expectedInstitutionName = 'Test';
+      transactionsFormServiceMock.auditInformation = {
+        searchType: '2',
+        ica: 1234,
+        custName: expectedInstitutionName,
+        processedTranId: expectedTranId
+      } as any;
+      const comp2 = new CsTransactionsFormComponent(
+        formBuilder, logger, renderer, transactionsFormServiceMock, routeMock
+      );
+      comp2.disableFields = jasmine.createSpy('disableFields');
+      comp2.ngOnInit();
+      comp2.populateForm();
+      expect(comp2.transactionForm.controls['searchField'].value).toEqual(expectedTranId);
     });
   });
 
@@ -347,6 +441,14 @@ describe('CsTransactionsComponent', function () {
       comp.remButtonEmitter.emit = jasmine.createSpy('remButtonEmitter');
       comp.openRemModal();
       expect(comp.remButtonEmitter.emit).toHaveBeenCalled();
+    });
+  });
+
+  describe('method: refreshLists', () => {
+    it('should emit refreshListsEmitter', () => {
+      comp.refreshListsEmitter.emit = jasmine.createSpy('refreshListsEmitter');
+      comp.refreshLists();
+      expect(comp.refreshListsEmitter.emit).toHaveBeenCalled();
     });
   });
 });

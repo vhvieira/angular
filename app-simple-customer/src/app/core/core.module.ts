@@ -30,6 +30,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FraudCenterCommons } from '@mc-fraud-center/commons';
 import { MastercardCommons, TranslateStaticLoader, makeConfig } from '@mastercard/ng-commons';
 import { MCErrorComponent } from './error-page/error-page.component';
+import { TfcViewerModule } from '@mc-fraud-center/ng-tfc-viewer';
 
 export function getAppBaseHref() {
   return window ? window.location.pathname : '';
@@ -77,6 +78,7 @@ const toastrConfig: Partial<GlobalConfig> = {
     TooltipModule.forRoot(),
     TypeaheadModule.forRoot(),
     PopoverModule.forRoot(),
+    TfcViewerModule.forRoot(),
   ],
   declarations: [
     MCErrorComponent

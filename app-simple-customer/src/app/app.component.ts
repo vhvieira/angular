@@ -83,7 +83,7 @@ export class AppComponent implements OnInit, OnDestroy {
         );
       }),
     ).subscribe(url => {
-      this.router.navigateByUrl(url).then(
+      this.router.navigateByUrl(url, { skipLocationChange: url.toString().includes('transactions') }).then(
         ok => {
           if (ok) {
             const message = { action, message: SELECT_TAB_MSG_KEY };
@@ -109,7 +109,7 @@ export class AppComponent implements OnInit, OnDestroy {
       const commands = ['./', params.tab];
       this.logger.debug('initial navigation');
       this.logger.info(`The AppComponent url is: `, this.router.url);
-      this.router.navigate(commands);
+      this.router.navigate(commands, { skipLocationChange: params.tab === 'transactions' });
     });
   }
 

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Logger } from '@mastercard/ng-commons';
 import modConfig from './data/tran-viewer-mod-config';
-import { TvColumnData } from '@mc-fraud-center/ng-transaction-viewer/shared/tv-column/tv-column-data.interface';
 import {
   TvSaveSettingsEvent,
   TvRowSelectEvent,
   TvRowDoubleClickEvent,
-  TvViewerComponent
-} from '@mc-fraud-center/ng-transaction-viewer';
+  TvViewerComponent,
+  TvColumnData
+} from '@mc-fraud-center/ng-tfc-viewer';
 import { Router } from '@angular/router';
 import { ViewEncapsulation } from '@angular/core';
 import {
@@ -65,9 +65,6 @@ export class CsTransactionsComponent implements OnInit {
       sortField: 'localTransactionDateTime',
       sortOrder: -1
     };
-    setTimeout(() => {
-      this.transactionsFormService.setTransactionsTab();
-    }, 1000);
   }
 
   ngOnInit() {

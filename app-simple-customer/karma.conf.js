@@ -12,6 +12,7 @@ module.exports = function (config) {
     frameworks: ['jasmine', '@angular/cli'],
     plugins: [
       require('karma-jasmine'),
+      require('karma-chrome-launcher'),
       require('karma-phantomjs-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
@@ -29,10 +30,10 @@ module.exports = function (config) {
       fixWebpackSourcePaths: true,
       thresholds: {
         global: {
-          statements: 70,
+          statements: 80,
           lines: 80,
-          branches: 45,
-          functions: 75,
+          branches: 80,
+          functions: 80,
         },
       }
     },
@@ -44,7 +45,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['PhantomJS'],
+    browsers: [process.env.JENKINS_HOME ? 'PhantomJS': 'ChromeHeadless'],
     singleRun: false
   });
 };

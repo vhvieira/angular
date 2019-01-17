@@ -19,6 +19,9 @@ div.table_container {
           span {
             color: #e87600;
           }
+          &.sortable {
+            cursor: pointer;
+          }
         }
       }
     }
@@ -28,6 +31,9 @@ div.table_container {
           span {
             font-weight: bold;
             padding-left: 7.5px;
+          }
+          span.tooltip-trigger {
+            cursor: pointer;
           }
           span.history {
             color: #e87600;

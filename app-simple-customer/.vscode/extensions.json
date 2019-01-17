@@ -3,7 +3,6 @@
   // for the documentation about the extensions.json format
   "recommendations": [
     "johnpapa.angular-essentials",
-    "donjayamanne.githistory",
     "eamodio.gitlens"
   ]
 }

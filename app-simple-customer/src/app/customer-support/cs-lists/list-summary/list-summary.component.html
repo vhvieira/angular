@@ -1,39 +1,39 @@
 <cs-transactions-form
   (addButtonEmitter)="openAddPanModal()"
   (remButtonEmitter)="openRemPanModal()"
+  (refreshListsEmitter)="onRefreshButtonClick()"
   [isReadonly]="true"
-  (newInquiryEvent)="onNewInquiry($event)"
-  [disableRemovePanButton]="disableAddPanButton"
-  [disableAddPanButton]="disableRemovePanButton"
+  (newInquiryEvent)="onNewInquiry()"
+  [disableRemovePanButton]="disableRemovePanButton"
+  [disableAddPanButton]="disableAddPanButton"
   ></cs-transactions-form>
 <div class="placeholder"></div>
 <div class="table_container">
-  <table class="responsive-table tblFiltered tblcheckFilltered" border="0">
+  <table class="responsive-table tblFiltered tblcheckFilltered">
         <thead>
           <tr>
               <th></th>
               <th>
                 <span>{{'CUSTOMER_SUPPORT.COLUMNS.HISTORY' | translate}}</span>
               </th>
-              <th (click)="sortBy('isPanInList', sortOrder * -1)" class="toggleItem">
+              <th (click)="sortBy('isPanInList', sortOrder * -1)" class="sortable toggleItem">
                 <span>
                   {{'CUSTOMER_SUPPORT.COLUMNS.ACTIVE_PAN' | translate}}
                 </span>
                 <i *ngIf="sortField === 'isPanInList' && sortOrder === -1" class="toggle-icon fa fa-caret-down"></i>
                 <i *ngIf="sortField === 'isPanInList' && sortOrder === 1" class="toggle-icon fa fa-caret-up"></i>
-
               </th>
-              <th (click)="sortBy('tableName', sortOrder * -1)">
+              <th (click)="sortBy('tableName', sortOrder * -1)" class="sortable">
                 <span>{{'CUSTOMER_SUPPORT.COLUMNS.LIST_NAME' | translate}}</span>
                 <i *ngIf="sortField === 'tableName' && sortOrder === -1" class="toggle-icon fa fa-caret-down"></i>
                 <i *ngIf="sortField === 'tableName' && sortOrder === 1" class="toggle-icon fa fa-caret-up"></i>
               </th>
-              <th (click)="sortBy('updateTime', sortOrder * -1)">
+              <th (click)="sortBy('updateTime', sortOrder * -1)" class="sortable">
                 <span>{{'CUSTOMER_SUPPORT.COLUMNS.LAST_UPDATE' | translate}}</span>
                 <i *ngIf="sortField === 'updateTime' && sortOrder === -1" class="toggle-icon fa fa-caret-down"></i>
                 <i *ngIf="sortField === 'updateTime' && sortOrder === 1" class="toggle-icon fa fa-caret-up"></i>
               </th>
-              <th (click)="sortBy('updateUser', sortOrder * -1)">
+              <th (click)="sortBy('updateUser', sortOrder * -1)" class="sortable">
                 <span>{{'CUSTOMER_SUPPORT.COLUMNS.LAST_USER' | translate}}</span>
                 <i *ngIf="sortField === 'updateUser' && sortOrder === -1" class="toggle-icon fa fa-caret-down"></i>
                 <i *ngIf="sortField === 'updateUser' && sortOrder === 1" class="toggle-icon fa fa-caret-up"></i>
@@ -53,36 +53,42 @@
               <td class="check-mobile">
                 <span class="dataCheck">
                     <input type="checkbox"
-                      id="checktd{{list.UserDefinedTableResponse.id}}"
-                      name="checktd{{list.UserDefinedTableResponse.id}}"
-                      [(ngModel)]="selectedListsList[list.UserDefinedTableResponse.id]"
+                      id="checktd{{list.id}}"
+                      name="checktd{{list.id}}"
+                      [(ngModel)]="selectedListsList[list.id]"
                       (ngModelChange)="changedSelectedLists(list)"
                       value="{{list.id}}">
-                    <label for="checktd{{list.UserDefinedTableResponse.id}}" class="checkbox-label">
+                    <label for="checktd{{list.id}}" class="checkbox-label">
                     </label>
                 </span>
               </td>
               <td>
-                  <span (click)="onClickHistory(list.UserDefinedTableResponse.id)">
-                      <i [ngClass]="{'fa':true, 'fa-minus': visibleHistory == list.UserDefinedTableResponse.id, 'fa-plus': visibleHistory !== list.id }"></i>
+                  <span (click)="onClickHistory(list.id)">
+                      <i [ngClass]="{'fa':true, 'fa-minus': visibleHistory == list.id, 'fa-plus': visibleHistory !== list.id }"></i>
                       <span>{{'Show History' | translate}}</span>
                   </span>
               </td>
-              <td><span class="dataSpan">{{list.isPanInList ? 'Y' : 'N'}}</span></td>
-              <td><span class="dataSpan">{{list.UserDefinedTableResponse.tableName}}</span></td>
               <td>
-                <span class="dataSpan">
-                  {{list.UserDefinedTableResponse.updateTime | dateFormat: 'DD-MMM-YYYY  hh:mma'}}
-                  <!-- | dateFormat: 'DD - MMM - YYYY - hh:MMa' -->
+                <span class="dataSpan tooltip-trigger"
+                  *ngIf="isPanInListText(list); let tooltipObject"
+                  [title]="tooltipObject.text | translate: tooltipObject.params"
+                >
+                  {{list.isPanInList | translate}}
+                </span>
+              </td>
+              <td><span class="dataSpan">{{list.tableName}}</span></td>
+              <td>
+                <span *ngIf="list.updateTime" class="dataSpan tooltip-trigger" [title]="getFullOriginalDate(list.updateTime)">
+                  {{list.updateTime | dateFormat: defaultDateFormat}}
                 </span>
               </td>
               <td>
                 <span class="dataSpan">
-                  {{list.UserDefinedTableResponse.updateUser}}
+                  {{list.updateUser}}
                 </span>
               </td>
           </tr>
-          <tr *ngIf="visibleHistory == list.UserDefinedTableResponse.id">
+          <tr *ngIf="visibleHistory == list.id">
             <td colspan="6" class="no-padding">
                 <cs-list-history-summary [data]="history"></cs-list-history-summary>
             </td>

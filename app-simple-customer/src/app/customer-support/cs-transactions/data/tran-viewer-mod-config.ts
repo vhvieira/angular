@@ -3,6 +3,9 @@ export const modConfig = {
     maxNoOfDays: '180',
     maxRecords: '500',
     maxRecordsPerPage: 25,
+    maxDisplayedColumns: 16,
+    minDisplayedColumns: 1,
+    tooltipLocalisationKeyPrefix: 'VALUES',
     sortField: 'processedDateTime',
     sortOrder: -1
   },
@@ -10,7 +13,6 @@ export const modConfig = {
     {
       field: 'alertSwitch',
       header: [
-        ' ',
         'Alert'
       ],
       sortable: true,
@@ -36,7 +38,6 @@ export const modConfig = {
     {
       field: 'processedDateTime',
       header: [
-        ' ',
         'Processed Date'
       ],
       sortable: true,
@@ -53,7 +54,6 @@ export const modConfig = {
     {
       field: 'processedTransactionId',
       header: [
-        ' ',
         'Transaction ID'
       ],
       sortable: true,
@@ -74,9 +74,10 @@ export const modConfig = {
       seq: 4,
       hidden: false,
       toggleable: true,
+      enableTooltip: true,
       filterType: 'dropdown',
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.D39_ISSR_RESP_CD'
+      localisationPrefix: 'VALUES.de39IssuerResponseCode'
     },
     {
       field: 'emsAdjustedScoreNumber',
@@ -103,7 +104,8 @@ export const modConfig = {
       toggleable: true,
       filterType: 'dropdown',
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.GENERIC_RSN_CD'
+      enableTooltip: true,
+      localisationPrefix: 'VALUES.emsAdjustedScoreReasonCode'
     },
     {
       field: 'de48Se56IssrSectyServTxt',
@@ -121,7 +123,6 @@ export const modConfig = {
     {
       field: 'brmsReasonCode3',
       header: [
-        ' ',
         'Alert Reason'
       ],
       sortable: true,
@@ -160,8 +161,9 @@ export const modConfig = {
       hidden: false,
       toggleable: true,
       filterType: 'dropdown',
+      enableTooltip: true,
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.DE22.1_POS_TRML_PAN_ENT_MODE'
+      localisationPrefix: 'VALUES.de221PosTerminalPanEntryMode'
     },
     {
       field: 'de222PosTerminalPinEntryMode',
@@ -174,8 +176,9 @@ export const modConfig = {
       hidden: false,
       toggleable: true,
       filterType: 'none',
+      enableTooltip: true,
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.DE22.2_POS_TRML_PIN_ENT_MODE_CD'
+      localisationPrefix: 'VALUES.de222PosTerminalPinEntryMode'
     },
     {
       field: 'de18MerchantTypeCode',
@@ -218,8 +221,9 @@ export const modConfig = {
       hidden: false,
       toggleable: true,
       filterType: 'dropdown',
+      enableTooltip: true,
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.DE43.5_MERCH_STATE_CD'
+      localisationPrefix: 'VALUES.de435MerchantStateCode'
     },
     {
       field: 'de121AuthorizingAgentIdCode',
@@ -272,13 +276,13 @@ export const modConfig = {
       hidden: true,
       toggleable: true,
       filterType: 'dropdown',
+      enableTooltip: true,
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.DE61.13_POS_COUNTRY_CD'
+      localisationPrefix: 'VALUES.de6113PosCountry'
     },
     {
       field: 'caseNumber',
       header: [
-        ' ',
         'Case Number'
       ],
       sortable: true,
@@ -325,8 +329,9 @@ export const modConfig = {
       hidden: true,
       toggleable: true,
       filterType: 'dropdown',
+      enableTooltip: true,
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.DE61.13_POS_COUNTRY_CD'
+      localisationPrefix: 'VALUES.de20PanCountryCode'
     },
     {
       field: 'de23CardSequenceNumber',
@@ -392,8 +397,9 @@ export const modConfig = {
       hidden: true,
       toggleable: true,
       filterType: 'none',
+      enableTooltip: true,
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.DE48_TRAN_CAT_CD'
+      localisationPrefix: 'VALUES.de48TransactionCategoryCode'
     },
     {
       field: 'de48Se83AddressVerRespCode',
@@ -406,8 +412,9 @@ export const modConfig = {
       hidden: true,
       toggleable: true,
       filterType: 'none',
+      enableTooltip: true,
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.DE48.83_AVS_RESP_TYPE_CD'
+      localisationPrefix: 'VALUES.de48Se83AddressVerRespCode'
     },
     {
       field: 'de49TransactionCurrencyCode',
@@ -420,8 +427,9 @@ export const modConfig = {
       hidden: true,
       toggleable: true,
       filterType: 'dropdown',
+      enableTooltip: true,
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.DE49_TRAN_CURR_CD'
+      localisationPrefix: 'VALUES.de49TransactionCurrencyCode'
     },
     {
       field: 'de51CardholderCurrencyCode',
@@ -434,8 +442,9 @@ export const modConfig = {
       hidden: true,
       toggleable: true,
       filterType: 'dropdown',
+      enableTooltip: true,
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.DE49_TRAN_CURR_CD'
+      localisationPrefix: 'VALUES.de51CardholderCurrencyCode'
     },
     {
       field: 'de6101PosTerminalAttendance',
@@ -448,8 +457,9 @@ export const modConfig = {
       hidden: true,
       toggleable: true,
       filterType: 'dropdown',
+      enableTooltip: true,
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.DE61.01_TRML_ATND_CD'
+      localisationPrefix: 'VALUES.de6101PosTerminalAttendance'
     },
     {
       field: 'de6104PosCardholderPresence',
@@ -462,8 +472,9 @@ export const modConfig = {
       hidden: true,
       toggleable: true,
       filterType: 'dropdown',
+      enableTooltip: true,
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.DE61.04_CRDHLDR_PRSNC_CD'
+      localisationPrefix: 'VALUES.de6104PosCardholderPresence'
     },
     {
       field: 'de6105PosCardPresence',
@@ -476,8 +487,9 @@ export const modConfig = {
       hidden: true,
       toggleable: true,
       filterType: 'dropdown',
+      enableTooltip: true,
       dataType: 'String',
-      localisationPrefix: 'VALUES.CASE_TRAN.DE61.05_POS_CARD_PRSNT_CD'
+      localisationPrefix: 'VALUES.de6105PosCardPresence'
     },
     {
       field: 'de63Sf2BanknetReferenceNumber',
@@ -495,7 +507,6 @@ export const modConfig = {
     {
       field: 'processingNetworkCode',
       header: [
-        ' ',
         'Processing Network Code'
       ],
       sortable: true,

@@ -53,6 +53,7 @@ export class AddPanModalComponent {
   show(): void {
     this.logger.debug('Showing Add Pan Modal');
     this.startDate = new Date();
+    this.startDate.setSeconds(0);
     this.setDefaultValues();
     this.modal.show();
   }
@@ -65,7 +66,7 @@ export class AddPanModalComponent {
     let names = '';
     const maxIndex = this.lists.length - 1;
     this.lists.forEach((list, index) => {
-      const listName = list.UserDefinedTableResponse.tableName;
+      const listName = list.tableName;
       if (index < maxIndex) {
         names = names + listName + ', ';
       } else {
@@ -90,6 +91,7 @@ export class AddPanModalComponent {
       this.endDate = CONFIG.DEFAULT_END_DATE;
       this.confirmationEndDate = this.formatConfirmationDate(this.endDate);
     }
+    this.endDate.setSeconds(59);
   }
 
   formatConfirmationDate(date: Date): string {
@@ -135,7 +137,7 @@ export class AddPanModalComponent {
       this.startDate,
       this.endDate
     ).subscribe( response => {
-      const ids = this.lists.map(list => list.UserDefinedTableResponse.id);
+      const ids = this.lists.map(list => list.id);
       this.listService.auditPost(ids, 1).subscribe(res => {
         this.logger.debug('res auditPost', res);
       });

@@ -183,9 +183,9 @@ describe('App Component', function () {
     let queryChangingRoute: any;
     beforeEach(() => {
 
-      queryChangingRoute = (vip: 'true' | 'false', params?: any): ActivatedRoute => {
+      queryChangingRoute = (params?: any): ActivatedRoute => {
         return {
-          queryParams: { pipe: () => of({ vip, params }) },
+          queryParams: { pipe: () => of(params) },
         } as any;
       };
 
@@ -195,16 +195,33 @@ describe('App Component', function () {
         auth,
         logger,
         router,
-        queryChangingRoute(true, {tab: 'anyTab'}),
+        queryChangingRoute({tab: 'transactions'}),
         message,
         preventNavigation as any
       );
     });
     it('should call router.navigate to the received tab IF app is alive', () => {
       component.addQueryListener();
-      setTimeout(1000, () => {
-        expect(router.navigate).toHaveBeenCalled();
-      });
+      expect(router.navigate).toHaveBeenCalled();
+    });
+    it('should call router.navigate with skipLocationChange if tab is transactions', () => {
+      const commands = ['./', 'transactions'];
+      component.addQueryListener();
+      expect(router.navigate).toHaveBeenCalledWith(commands, { skipLocationChange: true });
+    });
+    it('should call router.navigate with skipLocationChange FALSE if tab is NOT transactions', () => {
+      const commands = ['./', 'lists'];
+      const componentWithLists = new AppComponent(
+        translate,
+        auth,
+        logger,
+        router,
+        queryChangingRoute({tab: 'lists'}),
+        message,
+        preventNavigation as any
+      );
+      componentWithLists.addQueryListener();
+      expect(router.navigate).toHaveBeenCalledWith(commands, { skipLocationChange: false });
     });
 
   });

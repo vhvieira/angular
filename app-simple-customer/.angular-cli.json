@@ -24,8 +24,8 @@
         "../node_modules/@mastercard/ng-commons/styles.scss",
         "../node_modules/ngx-toastr/toastr.css",
         "../node_modules/font-awesome/css/font-awesome.css",
-        "../node_modules/@mc-fraud-center/ng-transaction-viewer/assets/styles/mcc-primeng-table.scss",
-        "../node_modules/@mc-fraud-center/ng-transaction-viewer/assets/styles/ng-transaction-viewer.scss",
+        "../node_modules/@mc-fraud-center/ng-tfc-viewer/assets/styles/mcc-primeng-table.scss",
+        "../node_modules/@mc-fraud-center/ng-tfc-viewer/assets/styles/tfc-viewer.scss",
       "styles.scss"
       ],
       "scripts": [],

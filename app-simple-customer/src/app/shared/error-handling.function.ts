@@ -5,7 +5,7 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { _throw } from 'rxjs/observable/throw';
 
 /** Navigates the user to /error when an HTTP request unexpectedly fails. */
-export function goToErrorPage(httpError: HttpError, logger: Logger, router: Router): ErrorObservable {
+export function goToErrorPage(httpError: HttpError, logger: Logger, router: Router): ErrorObservable<never> {
   logger.error(httpError);
   const queryParams = { code: httpError.status, description: httpError.displayMessage };
   router.navigate(['/error'], { queryParams });

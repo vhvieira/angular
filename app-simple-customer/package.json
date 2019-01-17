@@ -1,6 +1,6 @@
 {
   "name": "customer-support-webapp",
-  "version": "1.4.0-SNAPSHOT",
+  "version": "1.6.16",
   "description": "Angular Frontend UI for APP Customer Support",
   "scripts": {
     "ng": "ng",
@@ -14,8 +14,7 @@
     "build:ci": "ng build -prod -aot --build-optimizer --progress false",
     "test:ci": "ng test -cc --single-run --progress false",
     "postbuild": "save-build-version",
-    "postci": "save-build-version",
-    "build:translations": "json-concat src/assets/i18n/en-US/customer-support_en-US.json dist/assets/i18n/en-transaction-viewer.json dist/assets/i18n/en-US/customer-support_en-US.json"
+    "postci": "save-build-version"
   },
   "private": true,
   "dependencies": {
@@ -32,21 +31,21 @@
     "@mc-connect/core": "2.0.1",
     "@mc-connect/ng-commons": "2.3.0",
     "@mc-fraud-center/commons": "2.6.2",
-    "@mc-fraud-center/ng-transaction-viewer": "1.2.7",
+    "@mc-fraud-center/ng-tfc-viewer": "7.0.1",
     "@mc-fraud-center/stand-in-data-model": "2.0.0",
-    "@ngx-translate/core": "9.1.1",
+    "@ng-select/ng-select": "2.6.0",
+    "@ngx-translate/core": "10.0.2",
     "@ngx-translate/http-loader": "2.0.1",
     "cerialize": "0.1.18",
     "core-js": "2.5.3",
     "lodash": "4.17.5",
     "moment-timezone": "0.5.14",
-    "ng2-select": "2.0.0",
     "ngx-bootstrap": "2.0.2",
     "ngx-cookie": "2.0.1",
     "ngx-toastr": "8.2.1",
     "primeng": "5.2.0",
-    "rxjs": "5.5.6",
-    "underscore": "1.9.1",
+    "rxjs": "6.2.2",
+    "rxjs-compat": "6.3.1",
     "zone.js": "0.8.20"
   },
   "devDependencies": {
@@ -63,8 +62,8 @@
     "font-awesome": "4.7.0",
     "jasmine-core": "2.99.1",
     "jasmine-spec-reporter": "4.2.1",
-    "json-concat": "0.0.1",
     "karma": "2.0.0",
+    "karma-chrome-launcher": "2.2.0",
     "karma-cli": "1.0.1",
     "karma-coverage-istanbul-reporter": "1.4.1",
     "karma-jasmine": "1.1.1",
@@ -77,9 +76,5 @@
     "ts-node": "5.0.0",
     "tslint": "5.9.1",
     "typescript": "2.6.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://globalrepository.mclocal.int/stash/scm/standin/app-customer-support.git"
   }
 }

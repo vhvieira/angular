@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { moment } from 'ngx-bootstrap/chronos/test/chain';
 import { UdtHistory } from './list-history.model';
-
+import * as CONFIG from '../../../../constants';
 @Component({
   selector: 'cs-list-history-summary',
   templateUrl: './list-history-summary.component.html',
@@ -15,6 +15,7 @@ export class ListHistoryDetailComponent {
     str = this.removeBrackets(str);
     const s = str.split(',');
     s[1] = this.formatDate(s[1]);
+    s[2] = this.formatDate(s[2]);
     return s.join(' , ');
   }
 
@@ -23,7 +24,13 @@ export class ListHistoryDetailComponent {
   }
 
   formatDate(str: string): string {
-    return moment(str).format('ddd DD - MMM - YYYY hh:mmA');
+    const date = moment(str);
+
+    if (date.isValid()) {
+      return date.format(CONFIG.DEFAULT_DATE_FORMAT);
+    } else {
+      return str;
+    }
   }
 
   trackFn(index: any) {

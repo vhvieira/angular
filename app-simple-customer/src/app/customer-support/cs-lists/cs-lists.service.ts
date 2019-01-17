@@ -35,7 +35,7 @@ export class CSListService {
     this.sessionService = window.sessionStorage;
   }
 
-  getListHistory(listId: string, pan: string): Observable<UdtHistory[]> {
+  getListHistory(listId: number, pan: string): Observable<UdtHistory[]> {
     // same pan check, if not clear historyStorage
     const storageKey: string = listId.toString();
     const historyPan: string = this.historyStorage.get('PAN_REF');
@@ -61,6 +61,11 @@ export class CSListService {
     }
   }
 
+  resetListHistory(): void {
+    this.logger.debug('history cleared');
+    this.historyStorage.clear();
+  }
+
   getLists(): Observable<UdtListResponse> {
     this.logger.debug('Fetching lists');
     const url = CONFIG.API_LIST_LISTS;
@@ -70,7 +75,7 @@ export class CSListService {
       .withToastMessages(false, false);
     this.logger.debug('callUdtListsEndpoint get()');
     return this.http.get(request).pipe(
-        tap((res: any) => {
+        tap((res: HttpResponse<UdtListResponse>) => {
           return this.mapForErrors(res, 'getLists', request);
         }),
         map((res: any) => {
@@ -96,20 +101,13 @@ export class CSListService {
     return res;
   }
 
-  getPanFromList(listId: string, pan: string): Observable<ListItemResponse> {
-    this.logger.debug('Checking if PAN is in list');
-    const url = CONFIG.API_LIST_PAN.replace('{listId}', listId).replace('{pan}', pan);
+  getPanFromList(listId: number, pan: string): Observable<ListItemResponse> {
+    const url = CONFIG.API_LIST_PAN.replace('{listId}', listId.toString()).replace('{pan}', pan);
     const request = HttpReadRequest.create(url, ListItemResponse)
       .withOptions(this.createHeaders())
       .withWaitMessage('CUSTOMER_SUPPORT.WAIT.SEARCH_UDT')
       .withToastMessages(false, false);
-    return this.http.get(request).pipe( map((res: any) => {
-        this.logger.debug(res);
-        // this.showWarningMessages(res);
-        return res.data;
-      }),
-      catchError((error: any) => Observable.throw(error))
-    );
+    return this.http.get(request).pipe( map((res: any) => res.data));
   }
 
   addItemMultipleLists( lists: UdtList[], pan: string,
@@ -118,7 +116,7 @@ export class CSListService {
       let response: ListAggregateResponse = new ListAggregateResponse();
       return new Observable( (observer) => {
         for (let i = 0; i < lists.length; i++) {
-              const body = ListItemRequest.createRequest(lists[i].UserDefinedTableResponse.id, pan, startDate, endDate);
+              const body = ListItemRequest.createRequest(lists[i].id, pan, startDate, endDate);
               this.addItemList(body).subscribe(item => {
                 response = this.aggregateResponse(response, item , isFirst);
                 isFirst = false;
@@ -138,7 +136,7 @@ export class CSListService {
       let response: ListAggregateResponse = new ListAggregateResponse();
       return new Observable( (observer) => {
         for (let i = 0; i < lists.length; i++) {
-              const body = ListItemRequest.createRequest(lists[i].UserDefinedTableResponse.id, pan, startDate, endDate);
+              const body = ListItemRequest.createRequest(lists[i].id, pan, startDate, endDate);
               this.remItemList(body).subscribe(item => {
                 response = this.aggregateResponse(response, item , isFirst);
                 isFirst = false;
@@ -152,12 +150,12 @@ export class CSListService {
       });
     }
 
-  auditPost(tableIds: string[], type = 1) {
+  auditPost(tableIds: number[], type = 1) {
     const body: AuditRequestBody[] = [];
     tableIds.forEach(idNumber => {
       const typeProperty = { customerSupportActionType: CONFIG.AUDIT_ACTION_TYPES[type] };
       const auditBody = Object.assign(
-        { udtTblId: idNumber.toString() },
+        { udtTblId: idNumber },
         this.trxFormService.auditInformation as any,
         typeProperty
       );
@@ -166,7 +164,7 @@ export class CSListService {
 
     const bodyRequest = Serialize(body);
     const url = CONFIG.API_AUDIT_URL;
-    const request = HttpWriteRequest.create(url, bodyRequest, AuditRequestBody, String)
+    const request = HttpWriteRequest.create(url, bodyRequest, AuditRequestBody)
       .withOptions(this.createHeaders())
       .withWaitMessage('CUSTOMER_SUPPORT.WAIT.ADD_AUDIT_RECORD')
       .withToastMessages(
@@ -272,8 +270,8 @@ export class CSListService {
     return agg;
   }
 
-  private callUdtHistoryEndpoint(utdId: string, pan: string): Observable<HttpResponse<UdtDetail>> {
-    const url = CONFIG.API_LIST_HIST.replace('{id}', utdId).replace('{pan}', pan);
+  private callUdtHistoryEndpoint(utdId: number, pan: string): Observable<HttpResponse<UdtDetail>> {
+    const url = CONFIG.API_LIST_HIST.replace('{id}', utdId.toString()).replace('{pan}', pan);
     const request = HttpReadRequest.create(url, UdtDetail)
       .withOptions(this.createHeaders())
       .withWaitMessage('CUSTOMER_SUPPORT.WAIT.LISTHISTORY')
@@ -285,9 +283,6 @@ export class CSListService {
     let cid = '';
     let grpId = '';
     const headers = this.http.defaultHeaders;
-    // This code allows to testing using ngServe
-    if (CONFIG.TEST_HARCODE_LIST)
-      return this.createHardCodeHeaders();
     if (this.trxFormService.auditInformation) {
       this.logger.debug('Creating headers with ', this.trxFormService.auditInformation);
       cid = this.trxFormService.auditInformation.custId ?
@@ -298,18 +293,6 @@ export class CSListService {
     headers.set('X-Customer-ID', cid);
     headers.set('X-PRDCT-GRP-ID', grpId);
     this.logger.debug('Creating headers  ', headers);
-    return new RequestOptions({ headers });
-  }
-
-  /**
-   *  Method for local testing using hardcode list
-   */
-  private createHardCodeHeaders(): RequestOptions {
-    const headers = this.http.defaultHeaders;
-    headers.set('X-MC-FS-Accept-Language', LOCALE.ENGLISH);
-    headers.set('X-Customer-ID', CONFIG.TEST_HARDCODE_CID);
-    headers.set('X-PRDCT-GRP-ID', CONFIG.TEST_HARDCODE_GROUP_ID);
-    headers.set('withCredentials', 'true');
     return new RequestOptions({ headers });
   }
 

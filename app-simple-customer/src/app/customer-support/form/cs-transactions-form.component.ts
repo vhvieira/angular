@@ -25,6 +25,7 @@ export class CsTransactionsFormComponent implements OnInit {
   @Output() searchEvent: EventEmitter<FormGroup> = new EventEmitter();
   @Output() addButtonEmitter = new EventEmitter<boolean>();
   @Output() remButtonEmitter = new EventEmitter<boolean>();
+  @Output() refreshListsEmitter = new EventEmitter<boolean>();
   @Output() newInquiryEvent = new EventEmitter();
 
   @Input() url: string;
@@ -140,8 +141,10 @@ export class CsTransactionsFormComponent implements OnInit {
       this.transactionForm.controls['lastName'].setValue(values.requestorLastName);
       this.transactionForm.controls['comments'].setValue(values.comments);
       this.transactionForm.controls['ticketNumber'].setValue(values.ticketNumber);
-      this.ica = parseInt(values.ica!, 10);
-      this.institutionName = values.custName!;
+      if (values.ica && values.custName) {
+        this.ica = parseInt(values.ica, 10);
+        this.institutionName = values.custName;
+      }
       if (values!.searchType === '1') {
         this.transactionForm.controls['searchType'].setValue('1');
         this.transactionForm.controls['searchField'].setValue(values.pan);
@@ -149,6 +152,7 @@ export class CsTransactionsFormComponent implements OnInit {
         this.transactionForm.controls['searchType'].setValue('2');
         this.transactionForm.controls['searchField'].setValue(values.processedTranId);
       }
+      this.disableFields();
     } else {
       this.logger.error('AuditInformation/Form data not found by formService');
     }
@@ -277,4 +281,7 @@ export class CsTransactionsFormComponent implements OnInit {
     this.remButtonEmitter.emit(true);
   }
 
+  refreshLists(): void {
+    this.refreshListsEmitter.emit(true);
+  }
 }

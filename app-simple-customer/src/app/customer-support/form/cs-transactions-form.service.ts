@@ -5,7 +5,7 @@ import {
   ResearchTransactionResponse
 } from '../../core/interfaces/research-transaction-request';
 import * as CONFIG from '../../constants';
-import { TvColumnData } from '@mc-fraud-center/ng-transaction-viewer/shared/tv-column/tv-column-data.interface';
+import { TvColumnData } from '@mc-fraud-center/ng-tfc-viewer';
 
 @Injectable()
 export class CsTransactionsFormService {

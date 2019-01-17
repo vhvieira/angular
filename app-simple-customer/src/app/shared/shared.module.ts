@@ -25,7 +25,7 @@ import { MastercardCommons } from '@mastercard/ng-commons';
 import { MccCommons } from '@mc-connect/ng-commons';
 import { FraudCenterCommons } from '@mc-fraud-center/commons';
 import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
-import { TransactionViewerModule } from '@mc-fraud-center/ng-transaction-viewer';
+import { TfcViewerModule } from '@mc-fraud-center/ng-tfc-viewer';
 
 const bsModules = [
   AccordionModule,
@@ -61,7 +61,7 @@ const bsModules = [
     MccCommons,
     ReactiveFormsModule,
     InputMaskModule,
-    TransactionViewerModule,
+    TfcViewerModule,
   ],
   providers: [
     // Do not provide services here. Services are usually singletons that are provided once for

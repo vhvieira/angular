@@ -1,21 +1,22 @@
-import { Component, ViewChild, OnInit, Input, Output } from '@angular/core';
+import { Component, ViewChild, Input, Output, OnChanges } from '@angular/core';
 import { Logger } from '@mastercard/ng-commons';
 import { CSListService } from '../cs-lists.service';
 import { AddPanModalComponent } from '../add-pan-modal/add-pan-modal.component';
 import { RemovePanModalComponent } from '../rem-pan-modal/rem-pan-modal.component';
-// import * as CONFIG from '../../../constants';
 import { UdtList } from '../data/list-request-body';
 import { CsTransactionsFormService } from '../../form/cs-transactions-form.service';
 import { Router } from '@angular/router';
 import { EventEmitter } from '@angular/core';
-import { sortBy } from 'underscore';
 import { UdtHistory } from './list-history/list-history.model';
+import * as CONFIG from '../../../constants';
+import * as momentNS from 'moment';
+
 @Component({
   selector: 'cs-list-summary',
   templateUrl: './list-summary.component.html',
   styleUrls: ['./list-summary.component.scss']
 })
-export class ListSummaryComponent implements OnInit {
+export class ListSummaryComponent implements OnChanges {
 
   @Input() lists: UdtList[] = [];
   @Input() pan: string;
@@ -28,7 +29,8 @@ export class ListSummaryComponent implements OnInit {
   selectedLists: UdtList[] = []; // = [{id: CONFIG.TEST_HARDCODE_LIST_CODE}];
   selectedListsList = [];
   sortOrder = 1;
-  sortField = '';
+  sortField = 'tableName';
+  defaultDateFormat = CONFIG.DEFAULT_DATE_FORMAT;
   public visibleHistory: number | undefined;
   public history: UdtHistory[] = [];
 
@@ -43,14 +45,12 @@ export class ListSummaryComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnChanges(): void {
     this.logger.debug('List history initialized');
-    this.sortOrder = 1;
-    this.sortField = 'tableName';
     this.sortBy(this.sortField, this.sortOrder);
   }
 
-  onNewInquiry (_: any) {
+  onNewInquiry(): void {
     this.logger.debug('onNewInquiry');
     this.formService.reset();
     this.router.navigateByUrl('/transactions').then(
@@ -61,7 +61,7 @@ export class ListSummaryComponent implements OnInit {
       }
     );
   }
-  getListHistory(listId: string) {
+  getListHistory(listId: number) {
     this.logger.info('Calling getListHistory for listId=' + listId);
     this.listService.getListHistory(listId, this.pan).subscribe( response => {
       this.history = response.map(item => item);
@@ -70,7 +70,7 @@ export class ListSummaryComponent implements OnInit {
 
   onClickHistory(listId: number) {
       this.toggleVisibleHistory(listId);
-      this.getListHistory(listId.toString());
+      this.getListHistory(listId);
   }
 
   trackFn(index: number) {
@@ -89,34 +89,21 @@ export class ListSummaryComponent implements OnInit {
     this.visibleHistory = this.visibleHistory === i ? -1 : i;
   }
 
-  checkShouldDisable(exceptedValue: boolean): boolean {
-    for (const currList of this.selectedLists) {
-      if (currList.isPanInList !== exceptedValue)
-        return true;
-    }
-    return false;
+  get disableAddPanButton(): boolean {
+    return !this.selectedLists || !this.selectedLists.length;
   }
 
-  get disableAddPanButton() {
-    if (this.selectedLists && this.selectedLists.length > 0) {
-      return this.checkShouldDisable(true);
-    }
-    return true; // true is disabled
-  }
-
-  get disableRemovePanButton() {
-    if (this.selectedLists && this.selectedLists.length > 0) {
-      return this.checkShouldDisable(false);
-    }
-    return true; // true is disable
+  get disableRemovePanButton(): boolean {
+    const selected = this.selectedLists || [];
+    return selected.every(l => !l.isPanInList || l.isPanInList === CONFIG.PAN_LIST_STATUS.NOT_IN_LIST);
   }
 
   changedSelectedLists(eventList: any) {
     const listAlreadySelected = this.selectedLists.find(list =>
-      list.UserDefinedTableResponse.id === eventList.UserDefinedTableResponse.id);
+      list.id === eventList.id);
     if (listAlreadySelected) {
       this.selectedLists = this.selectedLists.filter(list =>
-        list.UserDefinedTableResponse.id !== eventList.UserDefinedTableResponse.id);
+        list.id !== eventList.id);
     } else {
       this.selectedLists.push(eventList);
     }
@@ -131,6 +118,10 @@ export class ListSummaryComponent implements OnInit {
     this.sortBy(this.sortField, this.sortOrder);
   }
 
+  onRefreshButtonClick(): void {
+    this.doRefreshLists([]);
+  }
+
   onPanRemoved(event: UdtList[]) {
     this.logger.debug('onPanRemoved ', event);
     this.doRefreshLists(event);
@@ -141,16 +132,36 @@ export class ListSummaryComponent implements OnInit {
     this.doRefreshLists(event);
   }
 
-  sortBy(field: string, order = 1) {
+  isPanInListText (list: UdtList): { text: string; params: { startDate?: string, endDate?: string } } {
+    if (!list.startDate) {
+      return { text: 'CUSTOMER_SUPPORT.LABELS.PAN_NOT_IN_LIST', params: {} };
+    }
+
+    const startDate = momentNS(list.startDate).format(CONFIG.FULL_DATE_FORMAT);
+    const endDate = momentNS(list.endDate).format(CONFIG.FULL_DATE_FORMAT);
+    const isPanInListText = `CUSTOMER_SUPPORT.LABELS.PAN_IN_LIST_TOOLTIP`;
+
+    return {text: isPanInListText, params: { startDate, endDate }};
+  }
+
+  sortBy(field: string, order = 1): void {
     this.sortOrder = order;
     this.sortField = field;
-    if (field === 'isPanInList') {
-      this.lists = sortBy(this.lists, (item: UdtList) => item.isPanInList);
-    } else {
-      this.lists = sortBy(this.lists, (item: UdtList) => item.UserDefinedTableResponse[field]);
-    }
-    if (order === -1) {
-      this.lists.reverse();
-    }
+    const normalize = (value: any): any => {
+      return typeof value === 'string' ? value.toLowerCase() : value;
+    };
+    this.lists.sort((left, right) => {
+      const a = normalize(left[field]);
+      const b = normalize(right[field]);
+      if (a === b) return 0;
+      if (a == null || a === '') return order * -1;
+      if (b == null || b === '') return order;
+      if (a < b) return order * -1;
+      return order;
+    });
+  }
+
+  getFullOriginalDate (date: any) {
+    return momentNS.parseZone(date).format(CONFIG.FULL_DATE_FORMAT);
   }
 }

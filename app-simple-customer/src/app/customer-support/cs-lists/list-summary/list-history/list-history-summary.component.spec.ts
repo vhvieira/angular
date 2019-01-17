@@ -26,6 +26,12 @@ describe('AddPanConfirmationModalComponent', function () {
       const result = component.formatDate(new Date().toDateString());
       expect(result).toBeDefined();
     });
+
+    it('invalid date should return the same text as input', function () {
+      const testText = 'NotADate';
+      const result = component.formatDate(testText);
+      expect(result).toBe(testText);
+    });
   });
 
   describe('Method: trackFn ', function () {

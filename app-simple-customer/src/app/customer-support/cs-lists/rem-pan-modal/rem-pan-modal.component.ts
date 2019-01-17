@@ -57,9 +57,11 @@ export class RemovePanModalComponent implements OnInit {
 
   private callRemPanService(): void {
     this.logger.debug('callRemPanService');
-    this.listService.removeItemMultipleLists(this.lists,
+    this.listService.removeItemMultipleLists(this.lists.filter(
+      e => e.isPanInList !== CONFIG.PAN_LIST_STATUS.NOT_IN_LIST
+    ),
         this.pan, new Date(), CONFIG.DEFAULT_END_DATE).subscribe( response => {
-      const ids = this.lists.map(list => list.UserDefinedTableResponse.id);
+      const ids = this.lists.map(list => list.id);
       this.listService.auditPost(ids, 3).subscribe(res => {
         this.logger.debug('res auditPost', res);
       });

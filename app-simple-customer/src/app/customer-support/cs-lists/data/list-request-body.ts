@@ -29,14 +29,14 @@ export class ItemsList {
 }
 export class ListItemRequest {
 
-  static createRequest(listId: string, pan: string, startDate: Date, endDate: Date): ListItemRequest {
+  static createRequest(listId: number, pan: string, startDate: Date, endDate: Date): ListItemRequest {
     const newRequest = new ListItemRequest();
     newRequest.id = listId;
     newRequest.items[0] = new ItemsList(pan, startDate, endDate);
     return newRequest;
   }
 
-  id = '';
+  id: number;
   items: ItemsList[] = [];
 
 }
@@ -69,6 +69,11 @@ export class ListItemResponse {
 }
 
 export class UdtListResponse {
+  public static OnDeserialized(data: UdtListResponse) {
+    data.udts.forEach(udtList => {
+      Object.assign(udtList, udtList.UserDefinedTableResponse);
+    });
+  }
   static createResponse(response: any): ListItemResponse {
     const newResponse = new ListItemResponse();
     newResponse.status.message = response.status.message;
@@ -81,13 +86,11 @@ export class UdtListResponse {
 }
 
 export class UdtList {
-  @d id = '';
-  isPanInList = false;
-  @d UserDefinedTableResponse: UserDefinedTableData;
-}
-
-export class UserDefinedTableData {
-  @d id = '';
+  isPanInList: CONFIG.PAN_LIST_STATUS;
+  startDate?: string;
+  endDate?: string;
+  @d id: number;
+  UserDefinedTableResponse: UdtList;
   @d status = '';
   @d tableName = '';
   @d udtTypeId = '';
@@ -96,7 +99,7 @@ export class UserDefinedTableData {
   @d mastercardId = '';
   @d itemCount = '';
   @d keyType = '';
-  @d updateTime = '';
+  @d updateTime = new Date().toString();
   @d updateUser = '';
   @d udtHistory = '';
   @d deploymentStatus = '';

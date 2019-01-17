@@ -104,4 +104,15 @@ describe('AddPanModalComponent', function () {
       expect(component.requestEndDate).toBeDefined();
     });
   });
+
+  describe('Method: setConfirmationDates ', () => {
+    it('should set the confirmationEndDate ', () => {
+      const expectedResult = 'result';
+      component.formatConfirmationDate = jasmine.createSpy('formatConfirmationDate').and.returnValue(expectedResult);
+      component.startDate = new Date();
+      component.endDate = new Date();
+      component.setConfirmationDates();
+      expect(component.confirmationEndDate).toEqual(expectedResult);
+    });
+  });
 });
