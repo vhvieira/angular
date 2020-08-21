@@ -20,7 +20,7 @@ export class AppModule implements DoBootstrap {
   constructor(private injector: Injector) {
     const strategyFactory = new ElementZoneStrategyFactory(UIButtonComponent, injector);
     const webComponent = createCustomElement(UIButtonComponent, {injector, strategyFactory});
-    customElements.define('log-activity', webComponent);
+    customElements.define('ui-button', webComponent);
   }
 
   ngDoBootstrap() {}

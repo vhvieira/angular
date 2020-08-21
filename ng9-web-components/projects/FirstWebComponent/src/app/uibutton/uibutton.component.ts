@@ -6,5 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./uibutton.component.css']
 })
 export class UIButtonComponent {
-  @Input() shouldCountClicks = false;
+  
+  @Input() 
+  shouldCountClicks:boolean = false;
 }
