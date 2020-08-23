@@ -4,9 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/app.home';
 import { EmployeesComponent } from './employees/employees.component';
 import { TransactionHeaderComponent } from './transactionheader/transactionheader.component';
-import { UnderlineDirective } from './mydirective';
+import { SimpleComponent } from './simple/app.simple';
+import { UnderlineDirective } from './simple/mydirective';
 import { AppRoutingModule } from './app.routing';
 // import { EmployeeFilterPipe } from './app.pipe';
 
@@ -20,10 +22,10 @@ import {FormBuilder, FormGroup, Validators, FormControl, NgForm, FormControlDire
 
 @NgModule({
   declarations: [
-    AppComponent, EmployeesComponent, UnderlineDirective, EmployeesComponent, TransactionHeaderComponent
+    AppComponent, EmployeesComponent, UnderlineDirective, EmployeesComponent, TransactionHeaderComponent, SimpleComponent, HomeComponent
   ],
   imports: [
-    BrowserModule, FormsModule, SharedModule, BrowserAnimationsModule, AppRoutingModule, MaterialModule,
+    BrowserModule, FormsModule, SharedModule, BrowserAnimationsModule, AppRoutingModule, MaterialModule
     // commented, not used in this component but in Header component
     // FormBuilder, FormGroup, Validators, FormControl, NgForm, FormControlDirective, FormGroupDirective,
   ],

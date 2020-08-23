@@ -4,14 +4,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // IMPORT USED MODULES
-import { AppComponent } from './app.component';
+import { HomeComponent } from './home/app.home';
 import { EmployeesComponent } from './employees/employees.component';
-import { TransactionHeaderComponent } from './transactionheader/transactionheader.component';
+import { SimpleComponent } from './simple/app.simple';
 
 const appRoutes: Routes = [
-    { path: '', component: AppComponent },
+    { path: '', component: HomeComponent  },
     { path: 'employees', component: EmployeesComponent },
-    { path: 'transaction/:pan', component: TransactionHeaderComponent }
+    { path: 'simple/:param', component: SimpleComponent }
 ];
 
 @NgModule({

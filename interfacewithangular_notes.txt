@@ -1,0 +1,103 @@
+[ ] Study:
+--https://angular.io/guide/dynamic-form
+--https://angular.io/guide/reactive-forms
+--JavaScript array functions unshift to push in the begning of the array
+--PrimeNg
+
+[ ] Next:
+https://www.linkedin.com/learning/angular-securing-apps?u=70941738
+
+[ ] Later: React: Building an interface (Villalobos)
+
+----------------------------------------------------------------------------
+1) --- Basics ---
+
+https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers
+
+--> Dev dependencies
+npm install --save-dev @fortawesome/fontawesome-svg-core
+npm install --save-dev @fortawesome/free-solid-svg-icons
+npm install --save-dev @fortawesome/angular-fontawesome
+
+npm install --save-dev jquery
+npm install --save-dev popper.js
+
+--> Regular dependencies
+npm install --save loadash
+
+--Ading styles to Angular in file angular.json
+--> Adding bootstrap in styles in build section specifing the way in node_modules/bootstrap..
+--> Adding jquery and popper.js in script sections as well the bootstrap.js
+
+main.ts in the main component for the application -> Is the bootstrap component.
+
+--> environments is the folder for diferents environments.
+
+
+----------------------------------------------------------------------------
+2) ------ Subcomponents ------
+ng create component components/add
+ng create component components/list
+ng create component components/search
+
+CLI adds component in app.module.ts
+
+Add: Data JSON in assets folder -> And use Observable to load data
+Import in module.ts HttpClientModule from @angular/common/http
+
+Import FontAwesomeModule from @fortawesome/angular-fontawesome
+Import library from @fortawesome/fontawesome-svg-core
+Import faTimes from @fortawesome/fontawesome-svg-icons
+
+<fa-icon icon="times"></fa-icon>
+
+@Output deleteEvent = new EventEmitter();
+
+Working with arrays using Lodash
+--remove from array a object
+import {without} from 'lodash';
+
+CSS in [ngClass]="{'add-appointment': showForm}";
+On CSS:
+.add-appointment .card-body {
+	display: none;
+}
+
+<div class="card-body">  ALL FORM IS HERE
+Import FormModule from Angular forms. 
+--Add ngModel to all inputs in form simple in the end.
+--Add (ngSubmit)="method1(aptForm)" and #aptForm="ngForm" to make easier
+Then EventEmitter and this.arrayName.unshift(newObject) 
+
+Search component:
+[(ngModel)]=query
+
+----------------------
+3) Managing List Data
+
+To modify the list he created two lists, to not modify the original one in filter.
+JavaScript has .filter methods and .sort (receives a function ()=>)
+
+[ngClass]="{'active':orderBy === 'fieldName'}
+
+--click for order
+(click)="handleSort({orderBy: orderBy, orderType: 'desc'})"
+
+--index in ngFor
+*ngFor="let item of list; index as xIndex" -> Not useful because array is ordered diff from json file.
+
+--used a data map to create a funciotion with any to inject a index in the array
+data.map((item:any) -> {
+	item.id = this.lastIndex++;
+	return item;
+});
+
+--editable field
+span class="xx" contenteditable="true|editMode" #fieldName 
+(blur)="handleUpdate(item, 'fieldName', fieldName.innerText)"
+
+--finding using lodash
+import {without, find} from 'lodash';
+
+aptIndex = findIndex(theList, {attribute: parameter.value});
+theList[aptIndex][parameter.labelName] = parameter.newValue;
